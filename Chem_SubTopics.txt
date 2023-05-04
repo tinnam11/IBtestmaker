@@ -1,0 +1,47 @@
+1.1:Introduction to the particulate nature of matter and chemical change
+1.2:The mole concept
+1.3:Reacting masses and volumes
+2.1:The nuclear atom
+2.2:Electron configuration
+3.1:Periodic table
+3.2:Periodic trends
+4.1:Ionic bonding and structure
+4.2:Covalent bonding
+4.3:Covalent structures
+4.4:Intermolecular forces
+4.5:Metallic bonding
+5.1:Measuring energy changes
+5.2:Hess’s Law
+5.3:Bond enthalpies
+6.1:Collision theory and rates of reaction
+7.1:Equilibrium
+8.1:Theories of acids and bases
+8.2:Properties of acids and bases
+8.3:The pH scale
+8.4:Strong and weak acids and bases
+8.5:Acid deposition
+9.1:Oxidation and reduction
+9.2:Electrochemical cells
+10.1:Fundamentals of organic chemistry
+10.2:Functional group chemistry
+11.1:Uncertainties and errors in measurement and results
+11.2:Graphical techniques
+11.3:Spectroscopic identification of organic compounds
+12.1:Electrons in atoms
+13.1:First-row d-block elements
+13.2:Coloured complexes
+14.1:Covalent bonding and electron domain and molecular geometries
+14.2:Hybridization
+15.1:Energy cycles
+15.2:Entropy and spontaneity
+16.1:Rate expression and reaction mechanism
+16.2:Activation energy
+17.1:The equilibrium law
+18.1:Lewis acids and bases
+18.2:Calculations involving acids and bases
+18.3:pH curves
+19.1:Electrochemical cells
+20.1:Types of organic reactions
+20.2:Synthetic routes
+20.3:Stereoisomerism
+21.1:Spectroscopic identification of organic compounds

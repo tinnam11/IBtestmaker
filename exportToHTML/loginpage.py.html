@@ -1,0 +1,109 @@
+<html>
+<head>
+<title>loginpage.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #808080;}
+.s3 { color: #6a8759;}
+.s4 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+loginpage.py</font>
+</center></td></tr></table>
+<pre><span class="s0">from </span><span class="s1">tkinter </span><span class="s0">import </span><span class="s1">*</span>
+<span class="s0">from </span><span class="s1">tkinter </span><span class="s0">import </span><span class="s1">messagebox</span>
+<span class="s0">from </span><span class="s1">functools </span><span class="s0">import </span><span class="s1">partial</span>
+<span class="s0">import </span><span class="s1">mysql.connector</span>
+
+<span class="s0">global </span><span class="s1">usernameEntry</span>
+<span class="s0">global </span><span class="s1">passwordEntry</span>
+
+<span class="s2">#clear username + password function</span>
+
+
+<span class="s2">#creating login page window</span>
+<span class="s1">root=Tk()</span>
+<span class="s1">root.resizable=(</span><span class="s0">False,False</span><span class="s1">)</span>
+<span class="s2">#default window size of window</span>
+<span class="s1">root.geometry(</span><span class="s3">'1305x780'</span><span class="s1">)</span>
+<span class="s2">#title of login window</span>
+<span class="s1">root.title (</span><span class="s3">'Login Page'</span><span class="s1">)</span>
+<span class="s2">#login page text</span>
+<span class="s1">top_title=Label( text=</span><span class="s3">&quot;Login Page&quot;</span><span class="s0">, </span><span class="s1">font= </span><span class="s3">'Opensans 60'</span><span class="s0">, </span><span class="s1">bg=</span><span class="s3">'#fcf1ef'</span><span class="s0">, </span><span class="s1">fg=</span><span class="s3">'black'</span><span class="s1">)\</span>
+    <span class="s1">.place(x=</span><span class="s4">500</span><span class="s0">, </span><span class="s1">y=</span><span class="s4">10</span><span class="s1">)</span>
+
+<span class="s2">#username text and input box</span>
+<span class="s1">usernameLabel = Label(root</span><span class="s0">, </span><span class="s1">text=</span><span class="s3">&quot;User Name:&quot;</span><span class="s0">,</span><span class="s1">font=</span><span class="s3">'Opensans 30'</span><span class="s1">).place(x=</span><span class="s4">350</span><span class="s0">, </span><span class="s1">y=</span><span class="s4">200</span><span class="s1">)</span>
+<span class="s1">username = StringVar()</span>
+<span class="s1">usernameEntry = Entry(root</span><span class="s0">, </span><span class="s1">font=</span><span class="s3">'Opensans 20'</span><span class="s0">, </span><span class="s1">textvariable=username</span><span class="s0">, </span><span class="s1">bg=</span><span class="s3">'#EFF0F1'</span><span class="s1">)\</span>
+    <span class="s1">.place(x=</span><span class="s4">600</span><span class="s0">, </span><span class="s1">y=</span><span class="s4">200</span><span class="s0">, </span><span class="s1">height=</span><span class="s4">40</span><span class="s1">)</span>
+
+<span class="s2">#password text and input box</span>
+<span class="s1">passwordLabel = Label(root</span><span class="s0">, </span><span class="s1">text=</span><span class="s3">&quot;Password:&quot;</span><span class="s0">,</span><span class="s1">font=</span><span class="s3">'Opensans 30'</span><span class="s1">).place(x=</span><span class="s4">350</span><span class="s0">, </span><span class="s1">y=</span><span class="s4">300</span><span class="s1">)</span>
+<span class="s1">password = StringVar()</span>
+<span class="s1">passwordEntry = Entry(root</span><span class="s0">, </span><span class="s1">font=</span><span class="s3">'Opensans 20'</span><span class="s0">, </span><span class="s1">textvariable=password</span><span class="s0">, </span><span class="s1">bg=</span><span class="s3">'#EFF0F1'</span><span class="s1">)\</span>
+    <span class="s1">.place(x=</span><span class="s4">600</span><span class="s0">, </span><span class="s1">y=</span><span class="s4">300</span><span class="s0">, </span><span class="s1">height=</span><span class="s4">40</span><span class="s1">)</span>
+
+<span class="s0">def </span><span class="s1">deleteuserpass():</span>
+    <span class="s1">print(</span><span class="s3">&quot;Test delete&quot;</span><span class="s1">)</span>
+    <span class="s2">#usernameEntry.delete(0, 'end)</span>
+    <span class="s2">#passwordEntry.delete(0, 'end')</span>
+    <span class="s1">usernameEntry.set(</span><span class="s3">&quot;test delete&quot;</span><span class="s1">)</span>
+
+
+<span class="s2">#hide password check button</span>
+<span class="s1">var1=IntVar()</span>
+<span class="s0">def </span><span class="s1">hidepass():</span>
+    <span class="s0">if </span><span class="s1">var1.get() == </span><span class="s4">1</span><span class="s1">:</span>
+        <span class="s1">passwordEntry = Entry(root</span><span class="s0">, </span><span class="s1">textvariable=password</span><span class="s0">, </span><span class="s1">show=</span><span class="s3">'*'</span><span class="s0">,</span><span class="s1">font=</span><span class="s3">'Opensans 20'</span><span class="s0">,</span>
+                              <span class="s1">bg=</span><span class="s3">'#EFF0F1'</span><span class="s1">).place(x=</span><span class="s4">600</span><span class="s0">, </span><span class="s1">y=</span><span class="s4">300</span><span class="s0">, </span><span class="s1">height=</span><span class="s4">40</span><span class="s1">)</span>
+    <span class="s0">else</span><span class="s1">:</span>
+        <span class="s1">passwordEntry = Entry(root</span><span class="s0">, </span><span class="s1">textvariable=password</span><span class="s0">, </span><span class="s1">font=</span><span class="s3">'Opensans 20'</span><span class="s0">, </span><span class="s1">bg=</span><span class="s3">'#EFF0F1'</span><span class="s1">)\</span>
+            <span class="s1">.place(x=</span><span class="s4">600</span><span class="s0">, </span><span class="s1">y=</span><span class="s4">300</span><span class="s0">, </span><span class="s1">height=</span><span class="s4">40</span><span class="s1">)</span>
+<span class="s1">hidepassbutton=Checkbutton(root</span><span class="s0">,</span><span class="s1">text=</span><span class="s3">&quot;hide pass&quot;</span><span class="s0">, </span><span class="s1">font=</span><span class="s3">'Opensans 20'</span><span class="s0">, </span><span class="s1">onvalue=</span><span class="s4">1</span><span class="s0">, </span><span class="s1">variable=var1</span><span class="s0">,</span>
+                           <span class="s1">command=hidepass).place(x=</span><span class="s4">760</span><span class="s0">,</span><span class="s1">y=</span><span class="s4">350</span><span class="s1">)</span>
+
+<span class="s2">#validating password, checking if it matches databse</span>
+<span class="s0">def </span><span class="s1">validateLogin(username</span><span class="s0">, </span><span class="s1">password):</span>
+    <span class="s1">mydb = mysql.connector.connect(</span>
+        <span class="s1">host=</span><span class="s3">&quot;192.168.64.3&quot;</span><span class="s0">,</span>
+        <span class="s1">user=</span><span class="s3">&quot;22TinnaM  &quot;</span><span class="s0">,</span>
+        <span class="s1">password=</span><span class="s3">&quot;test&quot;</span><span class="s0">,</span>
+        <span class="s2"># port=3307,</span>
+        <span class="s1">database=</span><span class="s3">&quot;test&quot;</span>
+    <span class="s1">)</span>
+    <span class="s1">mycursor = mydb.cursor()</span>
+    <span class="s1">username.get()</span>
+    <span class="s1">password.get()</span>
+    <span class="s2">#finding values from the specific user table</span>
+    <span class="s1">sql = </span><span class="s3">&quot;select * from userprofile where User_ID = %s and Password = %s&quot;</span>
+    <span class="s1">mycursor.execute(sql</span><span class="s0">,</span><span class="s1">[(username.get())</span><span class="s0">,</span><span class="s1">(password.get())])</span>
+    <span class="s1">results = mycursor.fetchall()</span>
+    <span class="s2">#ssucessful, then transfer to homepage</span>
+    <span class="s0">if </span><span class="s1">results:</span>
+        <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s1">results:</span>
+            <span class="s1">messagebox.showinfo(</span><span class="s3">&quot;Error&quot;</span><span class="s0">, </span><span class="s3">&quot;Successfully logged in&quot;</span><span class="s1">)</span>
+            <span class="s1">root.destroy()</span>
+            <span class="s0">import </span><span class="s1">homepage</span>
+            <span class="s0">break</span>
+    <span class="s0">else</span><span class="s1">:</span>
+        <span class="s1">messagebox.showinfo(</span><span class="s3">&quot;Error&quot;</span><span class="s0">, </span><span class="s3">&quot;Incorrect password. Please try again&quot;</span><span class="s1">)</span>
+        <span class="s1">deleteuserpass()</span>
+
+<span class="s2">#login button + passing value</span>
+<span class="s1">validateLogin= partial(validateLogin</span><span class="s0">, </span><span class="s1">username</span><span class="s0">, </span><span class="s1">password)</span>
+<span class="s1">loginbutton=Button(root</span><span class="s0">,</span><span class="s1">text=</span><span class="s3">&quot;Login&quot;</span><span class="s0">,</span><span class="s1">font=</span><span class="s3">'Opensans 20'</span><span class="s0">,</span><span class="s1">command=validateLogin</span><span class="s0">, </span><span class="s1">height=</span><span class="s4">2</span><span class="s0">,</span>
+                   <span class="s1">width=</span><span class="s4">12</span><span class="s1">).place(x=</span><span class="s4">713</span><span class="s0">,</span><span class="s1">y=</span><span class="s4">400</span><span class="s1">)</span>
+
+
+
+
+<span class="s1">root.mainloop()</span></pre>
+</body>
+</html>
